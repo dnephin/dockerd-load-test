@@ -1,2 +1,4 @@
 .*.swp
 .venv
+logs
+context/data

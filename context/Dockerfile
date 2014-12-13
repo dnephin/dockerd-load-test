@@ -1,5 +1,4 @@
 
-
 FROM    busybox:latest
-RUN     echo something
+ADD     . /data
 CMD     echo

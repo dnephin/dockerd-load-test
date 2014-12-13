@@ -1,15 +1,15 @@
 #!/bin/bash
 
-set -e
+set -eu
 
+mkdir -p ./logs ./tmp
 
-if [[ ! -d .venv ]]; then
-    virtualenv .venv
-    .venv/bin/pip install -r requirements.txt
+if [ ! -f ./context/data ]; then
+    echo Create some build context...may take a minute
+    dd if=/dev/urandom of=./context/data bs=10M count=40
 fi
-
-mkdir -p ./tmp
 
 sudo service docker stop || echo "Docker not running..."
 
-TMPDIR=./tmp sudo docker -d 2>&1 | tee dockerd.log
+TMPDIR=./tmp sudo docker -d 2>&1 | tee ./logs/dockerd.log
+
